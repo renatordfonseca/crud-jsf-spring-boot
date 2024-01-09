@@ -26,8 +26,3 @@ Joinfaces | Java | Spring Boot | JSF | Tomcat | Spring Framework |
 ----------|------|-------------|-----|--------|------------------|
 `4.1.5`   |`1.8` |`2.2.5`      |`2.3`|`9.0`   |`5.2`             |
 
-
-# crud-jsf-spring-boot
-# crud-jsf-spring-boot
-# crud-jsf-spring-boot
-# crud-jsf-spring-boot
