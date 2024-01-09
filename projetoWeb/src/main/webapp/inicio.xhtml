@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+
+<h:head>
+    <title>Renato Fonseca - CRUD JSF</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+</h:head>
+
+<h:body>
+    <p:layout fullPage="true">
+        <header>
+            <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Java Serves Faces - CRUD</span>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container" style="width: 60%;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    </ol>
+                </nav>
+                <article>
+                	<h:form>
+    					<h:button value="Gereciamento Pessoa" outcome="gerenciamentoPessoa.xhtml" styleClass="btn btn-primary" />
+    					<h:button value="Consulta Salário" outcome="consultaSalario.xhtml" styleClass="btn btn-primary" />
+					</h:form>
+
+                    <h3 class="card-title">Lista de Salário x Pessoa x Cargo</h3>
+                    
+					<h:form>
+    					<p:commandButton value="Atualizar Salários" action="#{pessoaSalarioController.atualizarSalario}"  update="tabelaSalarios" oncomplete="atualizarPagina()"/>
+    					<p:commandButton value="Carga Inicial Salários" action="#{pessoaSalarioController.cargaInicialSalario}"  update="tabelaSalarios" 
+    							oncomplete="atualizarPagina()"/>
+					</h:form>
+
+					
+                    <h:dataTable value="#{pessoaSalarioController.pessoa}" var="p" class="table table-striped"
+                    paginator="true" rows="10" paginatorPosition="bottom" id="tabelaSalarios">
+                    
+                        <h:column>
+                            <f:facet name="header">Nome</f:facet>
+                            <h:outputText value="#{p.nome}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Salário</f:facet>
+                            <h:outputText value="#{p.salario}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Cargo</f:facet>
+                            <h:outputText value="#{p.pessoa.cargo.nome}"/>
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h:form>
+						<p:commandButton value="Página Anterior" action="#{pessoaSalarioController.previousPage}" update="tabelaSalarios"/>
+						<p:commandButton value="Próxima Página" action="#{pessoaSalarioController.nextPage}" update="tabelaSalarios" />
+					</h:form>
+				
+                </article>
+            </div>
+        </main>
+
+        <footer>
+            <h:panelGroup layout="block" styleClass="navbar navbar-light bg-light">
+                <h:outputText value=" &copy; 2024 - Desenvolvido por Renato Fonseca"/>
+            </h:panelGroup>
+        </footer>
+
+    </p:layout>
+</h:body>
+<script>
+function atualizarPagina() {
+    location.reload(); // Isso recarregará a página
+}
+</script>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<h:head>
+    <title>Renato Fonseca - CRUD JSF</title>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="style/styleCss.css"/> -->
+</h:head>
+
+<h:body>
+    <p:layout fullPage="true">
+        <header>
+            <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Java
+                    Serves Faces - CRUD</span>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container" style="width: 60%;">
+            <p:messages showDetail="true" autoUpdate="true" />
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"
+                        style="background-color: white; padding-left: 0px;">
+                        <li class="breadcrumb-item"><a href="inicio.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item">Gereciamento Pessoa</li>
+                    </ol>
+                </nav>
+                <article>
+                    <h:form>
+                        <h6 class="card-title">Cadastro de Pessoa</h6>
+
+                        <div class="form-group" id="origem">
+
+                            <h:outputLabel for="nomeCompleto" value="Nome: *" />
+                            <h:inputText id="nomeCompleto" styleClass="form-control"
+                            value="#{pessoaController.nomeCompleto}"/>
+
+                            <h:outputLabel for="cargo" value="Cargo: *" />
+                            <h:selectOneMenu id="cargo" styleClass="form-control" value="#{pessoaController.cargo}">
+							    <f:selectItem itemLabel="Selecione um cargo" itemValue="" />
+							    <f:selectItem itemLabel="Estagiario" itemValue="1" />
+							    <f:selectItem itemLabel="Tecnico" itemValue="2" />
+							    <f:selectItem itemLabel="Analista" itemValue="3" />
+							    <f:selectItem itemLabel="Coordenador" itemValue="4" />
+							    <f:selectItem itemLabel="Gerente" itemValue="5" />
+							</h:selectOneMenu>
+
+                            <h:commandButton value="Adicionar"
+                                action="#{pessoaController.salvar}" styleClass="btn btn-primary"
+                                style="margin-top: 10px;" />
+
+                            <small class="form-text text-muted">(*) Campos obrigatórios</small>
+                        </div>
+                    </h:form>
+
+                    <h:form id="formPrincipal">
+                        <h6 class="card-title">Buscar Pessoa</h6>
+
+                        <div class="form-group" id="origem">
+                            <h:outputLabel for="nomeCompleto" value="Nome:" />
+                            <h:inputText id="nomeCompleto" styleClass="form-control"
+                                value="#{pessoaController.nomeCompleto}" />
+
+                            <h:commandButton value="Buscar"
+                                action="#{pessoaController.buscarPorNome}"
+                                styleClass="btn btn-primary" style="margin-top: 10px;" />
+
+                            <small class="form-text text-muted">(*) Campos obrigatórios</small>
+                        </div>
+
+                        <h:dataTable value="#{pessoaController.resultados}" var="pessoa"
+                            class="table table-striped" rendered="#{not empty pessoaController.resultados}"
+                            id="tabelaResultados">
+
+                            <h:column>
+                                <f:facet name="header">Nome</f:facet>
+                                <h:outputText value="#{pessoa.nome}" />
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Cargo</f:facet>
+                                <h:outputText value="#{pessoa.cargo.nome}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Opções</f:facet>
+                                <p:commandButton action="#{pessoaController.deletar(pessoa)}"
+                                    value="Deletar" update="tabelaResultados"
+                                    process="@all" ajax="true" 
+                                    oncomplete="recarregarPagina()"/>
+                                <p:commandButton action="#{pessoaController.editarPessoa(pessoa)}"
+           						 value="Editar" ajax="true" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>
+                </article>
+            </div>
+        </main>
+
+        <footer>
+            <h:panelGroup layout="block" styleClass="navbar navbar-light bg-light">
+                <h:outputText value=" &copy; 2024 - Desenvolvido por Renato Fonseca" />
+            </h:panelGroup>
+        </footer>
+
+    </p:layout>
+</h:body>
+
+<script>
+    function recarregarPagina() {
+        location.reload(true);
+    }
+</script>
+
+</html>

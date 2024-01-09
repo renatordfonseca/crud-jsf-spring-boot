@@ -1,0 +1,52 @@
+body { font-size: 12px; color: #666; font-family: verdana; }
+
+table {
+	width: 90%;
+	border: 1px solid #ccc;
+	padding: 4px;
+	margin: 8px;
+}
+
+.listagem tr, .listagem th, .listagem td {
+	
+	border: 1px solid #ccc;
+}
+
+table thead tr th, caption {
+	background-color: #3366FF;
+	color: #fff;
+}
+
+caption{
+	font-size: 16px;
+}
+
+
+
+#top{
+	
+	margin: 8px;
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+
+#bread_crumbs{
+	
+	margin: 8px;
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+
+#main_content {
+	
+	margin: 8px;
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+
+#footer{
+	margin: 8px;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 8px;
+}
